@@ -41,6 +41,7 @@ public class TicTacToe {
         player1 = new Human(Space.State.X);
         player2 = new AI(Space.State.O);
         
+        renderer.renderBoard();
         board.setSpace(player1.prompt(), player1.getState());
         board.setSpace(player2.prompt(), player2.getState());
         renderer.renderBoard();

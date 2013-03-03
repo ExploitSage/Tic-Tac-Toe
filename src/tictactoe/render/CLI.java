@@ -19,7 +19,7 @@ public class CLI extends Renderer {
     public void renderBoard() {
         for(int i = 0; i < 9; i++) {
             if(TicTacToe.board.getSpace(i+1) == (Space.State.Empty)) {
-                System.out.print(" ");
+                System.out.print(i+1);
             } else if(TicTacToe.board.getSpace(i+1).equals(Space.State.X)) {
                 System.out.print("X");
             } else {

@@ -16,7 +16,39 @@ public class AI extends Player {
     private Space.State enemyState;
     private Board board = TicTacToe.board;
     
-    @SuppressWarnings("empty-statement")
+    public abstract class Difficulty {
+        
+        public abstract int getMove(Board board);
+        
+    }
+    
+    public class Easy extends Difficulty {
+
+        @Override
+        public int getMove(Board board) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+        
+    }
+    
+    public class Medium extends Difficulty {
+
+        @Override
+        public int getMove(Board board) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+        
+    }
+    
+    public class Hard extends Difficulty {
+
+        @Override
+        public int getMove(Board board) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+        
+    }
+    
     public AI(Space.State state) {
         super(state);
         if(getState() == Space.State.O) {
