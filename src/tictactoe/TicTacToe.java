@@ -41,25 +41,56 @@ public class TicTacToe {
         player1 = new Human(Space.State.X);
         player2 = new AI(Space.State.O);
         
+        while((!winDetect(player1.getState()) && !winDetect(player2.getState())) && !board.isFull()) {
+            renderer.renderBoard();
+            boolean fail;
+            do {
+                fail = false;
+                try {
+                    board.setSpace(player1.prompt(), player1.getState());
+                } catch(RuntimeException e) {
+                    if(board.isFull()) {
+                        break;
+                    }
+                    fail = true;
+                }
+            } while(fail);
+            
+            do {
+                fail = false;
+                try {
+                    board.setSpace(player2.prompt(), player2.getState());
+                } catch(RuntimeException e) {
+                    if(board.isFull()) {
+                        break;
+                    }
+                    fail = true;
+                }
+            } while(fail);
+        }
         renderer.renderBoard();
-        board.setSpace(player1.prompt(), player1.getState());
-        board.setSpace(player2.prompt(), player2.getState());
-        renderer.renderBoard();
-        board.setSpace(player1.prompt(), player1.getState());
-        board.setSpace(player2.prompt(), player2.getState());
-        renderer.renderBoard();
-        board.setSpace(player1.prompt(), player1.getState());
-        board.setSpace(player2.prompt(), player2.getState());
-        renderer.renderBoard();
-        board.setSpace(player1.prompt(), player1.getState());
-        board.setSpace(player2.prompt(), player2.getState());
-        renderer.renderBoard();
-        board.setSpace(player1.prompt(), player1.getState());
-        board.setSpace(player2.prompt(), player2.getState());
-        renderer.renderBoard();
+        if(winDetect(player1.getState())) {
+            System.out.println("PLAYER1 WIN!");
+        } else if(winDetect(player2.getState())) {
+            System.out.println("PLAYER2 WIN!");
+        } else {
+            System.out.println("CAT GAME!");
+        }
     }
     
-    public void winDetect() {
-        
+    public static boolean winDetect(Space.State state) {
+        int have;
+        for(int i = 0; i < win.length; i++) {
+            have = 0;
+            for(int j = 0; j <win[i].length; j++) {
+                if(board.getSpace(win[i][j]) == state) {
+                    have++;
+                }
+            }
+            if(have == 3) {
+                return true;
+            }
+        }
+        return false;
     }
 }

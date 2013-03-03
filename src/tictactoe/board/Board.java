@@ -68,4 +68,14 @@ public class Board {
         }
         return states;
     }
+    
+    public boolean isFull() {
+        boolean noEmpty = true;
+        for(int i = 0; i < m_spaces.length; i++) {
+            if(m_spaces[i].getState() == Space.State.Empty) {
+                noEmpty = false;
+            }
+        }
+        return noEmpty;
+    }
 }
