@@ -36,11 +36,11 @@ public class AI extends Player {
             int have = 0;
             
             for(int j = 0; j < TicTacToe.win[i].length; j++) {
-                if(board.getSpace(TicTacToe.win[i][j]) == getState()) {
+                if(board.getSpace(TicTacToe.win[i][j]) == getState()) { //Scan win combination for Possitions
                     have++;
                 }
             }
-            if(have == 2) {
+            if(have == 2) { //Check for almost win condition
                 for(int j = 0; j < TicTacToe.win[i].length; j++) {
                     if(board.getSpace(TicTacToe.win[i][j]) == Space.State.Empty) { //attempt to win
                         return TicTacToe.win[i][j];
@@ -49,44 +49,44 @@ public class AI extends Player {
             }
         }
         
-        for(int i = 0; i < TicTacToe.win.length; i++) { //Second priority, Block Opponent
+        for(int i = 0; i < TicTacToe.win.length; i++) { //Second priority, Block Opponent from win
             int taken = 0;
             
             for(int j = 0; j < TicTacToe.win[i].length; j++) {
-                if(board.getSpace(TicTacToe.win[i][j]) == enemyState) { //find how many spaces enemy has on current TicTacToe.win cycle
+                if(board.getSpace(TicTacToe.win[i][j]) == enemyState) { //find how many spaces opponent has on current win combo
                     taken++;
                 }
             }
             if(taken == 2) {
                 for(int j = 0; j < TicTacToe.win[i].length; j++) {
-                    if(board.getSpace(TicTacToe.win[i][j]) == Space.State.Empty) { //attempt to block enemy TicTacToe.win
+                    if(board.getSpace(TicTacToe.win[i][j]) == Space.State.Empty) { //attempt to block opponent Win
                         return TicTacToe.win[i][j];
                     }
                 }
             }
         }
         
-        for(int i = 0; i < TicTacToe.win.length; i++) { //Second priority, continue towards TicTacToe.win
+        for(int i = 0; i < TicTacToe.win.length; i++) { //Third priority, continue towards Win
             int have = 0;
             for(int j = 0; j < TicTacToe.win[i].length; j++) {
-                if(board.getSpace(TicTacToe.win[i][j]) == getState()) {
+                if(board.getSpace(TicTacToe.win[i][j]) == getState()) {//Scan win combination for Possitions
                     have++;
                 }
             }
             if(have == 1) {
                 for(int j = 0; j < TicTacToe.win[i].length; j++) {
-                    if(board.getSpace(TicTacToe.win[i][j]) == Space.State.Empty) { //attempt to TicTacToe.win
+                    if(board.getSpace(TicTacToe.win[i][j]) == Space.State.Empty) { //attempt to Place second peice
                         return TicTacToe.win[i][j];
                     }
                 }
             }
         }
         
-        for(int i = 0; i < board.getSpaces().length; i++) { //Fourth priority, first move?
+        for(int i = 0; i < board.getSpaces().length; i++) { //Fourth priority, Take first avalible space
             if(board.getSpace(i+1) == Space.State.Empty) {
                 return i+1;
             }
         }
-        return 0;
+        return 0; //Error...
     }
 }
