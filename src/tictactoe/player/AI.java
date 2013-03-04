@@ -100,17 +100,18 @@ public class AI extends Player {
         
         for(int i = 0; i < TicTacToe.win.length; i++) { //Third priority, continue towards Win
             int have = 0;
+            int empty = 0;
             for(int j = 0; j < TicTacToe.win[i].length; j++) {
                 if(board.getSpace(TicTacToe.win[i][j]) == getState()) {//Scan win combination for Possitions
                     have++;
                 }
+                if(board.getSpace(TicTacToe.win[i][j]) == Space.State.Empty) {
+                    empty++;
+                }
             }
-            if(have == 1) {
+            if(have == 1 && empty == 2) {
                 for(int j = 0; j < TicTacToe.win[i].length; j++) {
-                    if(board.getSpace(TicTacToe.win[i][j]) == enemyState) {
-                        break;
-                    }
-                    if(board.getSpace(TicTacToe.win[i][j]) == Space.State.Empty) { //attempt to Place second peice
+                    if(board.getSpace(TicTacToe.win[i][j]) == Space.State.Empty) {
                         return TicTacToe.win[i][j];
                     }
                 }
