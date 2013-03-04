@@ -42,9 +42,10 @@ public class TicTacToe {
         boolean gameOn = true;
         while(gameOn) {
             for(int i = 0; i < player.length; i++) {
-                if((!winDetect(player[0].getState()) && !winDetect(player[1].getState())) && !board.isFull()) {
+                if(!gameWon() && !board.isFull()) {
                     if(player[i].getClass() == Human.class) {
                         renderer.renderBoard();
+                        System.out.println();
                     }
                     boolean fail;
                     do {
@@ -56,18 +57,27 @@ public class TicTacToe {
                         }
                     } while(fail);
                 } else {
-                    gameOn = false;
+                    renderer.renderBoard();
+                    if(winDetect(player[0].getState())) {
+                        renderer.renderWin("Human");
+                    } else if(winDetect(player[1].getState())){
+                        renderer.renderWin("AI");
+                    } else {
+                        renderer.renderWin("cat");
+                    }
+                    board.reset();
+                    break;
                 }
             }
         }
-        renderer.renderBoard();
-        if(winDetect(player[0].getState())) {
-            renderer.renderWin("Human");
-        } else if(winDetect(player[1].getState())){
-            renderer.renderWin("AI");
-        } else {
-            renderer.renderWin("cat");
+        System.out.println("Thanks for Playing TicTacToe!\n\tBy Gustave Michel III");
+    }
+    
+    public static boolean gameWon() {
+        if(winDetect(Space.State.X) || winDetect(Space.State.O)) {
+            return true;
         }
+        return false;
     }
     
     public static boolean winDetect(Space.State state) {

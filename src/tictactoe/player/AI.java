@@ -107,6 +107,9 @@ public class AI extends Player {
             }
             if(have == 1) {
                 for(int j = 0; j < TicTacToe.win[i].length; j++) {
+                    if(board.getSpace(TicTacToe.win[i][j]) == enemyState) {
+                        break;
+                    }
                     if(board.getSpace(TicTacToe.win[i][j]) == Space.State.Empty) { //attempt to Place second peice
                         return TicTacToe.win[i][j];
                     }
