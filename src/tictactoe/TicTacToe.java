@@ -45,7 +45,6 @@ public class TicTacToe {
                 if(!gameWon() && !board.isFull()) {
                     if(player[i].getClass() == Human.class) {
                         renderer.renderBoard();
-                        System.out.println();
                     }
                     boolean fail;
                     do {
@@ -64,6 +63,14 @@ public class TicTacToe {
                         renderer.renderWin("AI");
                     } else {
                         renderer.renderWin("cat");
+                    }
+                    for(int j = 0; j < player.length; j++) {
+                        if(player[j].getClass() == Human.class) {
+                            if(!renderer.promptContinue("Player"+(j+1))) {
+                                gameOn = false;
+                                break;
+                            }
+                        }
                     }
                     board.reset();
                     break;

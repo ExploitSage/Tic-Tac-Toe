@@ -17,6 +17,7 @@ public class CLI extends Renderer {
     
     @Override
     public void renderBoard() {
+        System.out.println();
         for(int i = 0; i < 9; i++) {
             if(TicTacToe.board.getSpace(i+1) == (Space.State.Empty)) {
                 System.out.print(i+1);
@@ -36,8 +37,10 @@ public class CLI extends Renderer {
                     break;
                 case 2:
                 case 5:
-                case 8:
                     System.out.println("\n-----");
+                    break;
+                case 8:
+                    System.out.println();
             }
         }
     }
@@ -55,6 +58,12 @@ public class CLI extends Renderer {
         } else {
             System.out.println(name+" Won!");
         }
+    }
+
+    @Override
+    public boolean promptContinue(String name) {
+        System.out.print(name +": Continue? (true/false): ");
+        return scanner.nextBoolean();
     }
     
 }
