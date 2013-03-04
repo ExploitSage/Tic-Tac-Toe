@@ -15,6 +15,7 @@ import tictactoe.board.Space;
 public class AI extends Player {
     private Space.State enemyState;
     private Board board = TicTacToe.board;
+    private int[] perfered = new int[]{5,1,3,7,9};
     
     public abstract class Difficulty {
         
@@ -118,7 +119,13 @@ public class AI extends Player {
             }
         }
         
-        for(int i = 0; i < board.getSpaces().length; i++) { //Fourth priority, Take first avalible space
+        for(int i = 0; i < perfered.length; i++) { //Fourth priority, take perfered spaces
+            if(board.getSpace(perfered[i]) == Space.State.Empty) {
+                return perfered[i];
+            }
+        }
+        
+        for(int i = 0; i < board.getSpaces().length; i++) { //Fifth priority, Take first avalible space
             if(board.getSpace(i+1) == Space.State.Empty) {
                 return i+1;
             }
