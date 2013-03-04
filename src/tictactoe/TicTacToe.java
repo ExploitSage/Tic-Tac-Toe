@@ -28,53 +28,45 @@ public class TicTacToe {
         {3,5,7}
     };
     
-    private static Player player1;
-    private static Player player2;
+    private static Player[] player = new Player[2];
     public static Board board = new Board();
     public static Renderer renderer = new CLI();
-    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        player1 = new Human(Space.State.X);
-        player2 = new AI(Space.State.O);
+        player[0] = new Human(Space.State.X);
+        player[1] = new AI(Space.State.O);
         
-        while((!winDetect(player1.getState()) && !winDetect(player2.getState())) && !board.isFull()) {
-            renderer.renderBoard();
-            boolean fail;
-            do {
-                fail = false;
-                try {
-                    board.setSpace(player1.prompt(), player1.getState());
-                } catch(RuntimeException e) {
-                    if(board.isFull()) {
-                        break;
+        boolean gameOn = true;
+        while(gameOn) {
+            for(int i = 0; i < player.length; i++) {
+                if((!winDetect(player[0].getState()) && !winDetect(player[1].getState())) && !board.isFull()) {
+                    if(player[i].getClass() == Human.class) {
+                        renderer.renderBoard();
                     }
-                    fail = true;
+                    boolean fail;
+                    do {
+                        try {
+                            board.setSpace(player[i].prompt(), player[i].getState());
+                            fail = false;
+                        } catch(RuntimeException e) {
+                            fail = true;
+                        }
+                    } while(fail);
+                } else {
+                    gameOn = false;
                 }
-            } while(fail);
-            
-            do {
-                fail = false;
-                try {
-                    board.setSpace(player2.prompt(), player2.getState());
-                } catch(RuntimeException e) {
-                    if(board.isFull()) {
-                        break;
-                    }
-                    fail = true;
-                }
-            } while(fail);
+            }
         }
         renderer.renderBoard();
-        if(winDetect(player1.getState())) {
-            System.out.println("PLAYER1 WIN!");
-        } else if(winDetect(player2.getState())) {
-            System.out.println("PLAYER2 WIN!");
+        if(winDetect(player[0].getState())) {
+            renderer.renderWin("Human");
+        } else if(winDetect(player[1].getState())){
+            renderer.renderWin("AI");
         } else {
-            System.out.println("CAT GAME!");
+            renderer.renderWin("cat");
         }
     }
     

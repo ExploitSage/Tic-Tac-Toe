@@ -12,4 +12,6 @@ public abstract class Renderer {
     public abstract void renderBoard();
     
     public abstract int promptHuman();
+    
+    public abstract void renderWin(String name);
 }

@@ -47,5 +47,14 @@ public class CLI extends Renderer {
         System.out.print("Pick Next Move (1-9): ");
         return scanner.nextInt();
     }
+
+    @Override
+    public void renderWin(String name) {
+        if(name.equalsIgnoreCase("cat")) {
+            System.out.println("Cat Game!");
+        } else {
+            System.out.println(name+" Won!");
+        }
+    }
     
 }
