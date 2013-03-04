@@ -16,7 +16,7 @@ public class GUI extends Renderer{
     }
 
     @Override
-    public int promptHuman() {
+    public String promptHuman() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

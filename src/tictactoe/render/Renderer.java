@@ -11,7 +11,7 @@ package tictactoe.render;
 public abstract class Renderer {
     public abstract void renderBoard();
     
-    public abstract int promptHuman();
+    public abstract String promptHuman();
     
     public abstract void renderWin(String name);
     

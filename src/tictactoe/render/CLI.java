@@ -4,6 +4,7 @@
  */
 package tictactoe.render;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import tictactoe.TicTacToe;
 import tictactoe.board.Space;
@@ -46,9 +47,9 @@ public class CLI extends Renderer {
     }
 
     @Override
-    public int promptHuman() {
+    public String promptHuman() {
         System.out.print("Pick Next Move (1-9): ");
-        return scanner.nextInt();
+        return scanner.next();
     }
 
     @Override
@@ -62,8 +63,26 @@ public class CLI extends Renderer {
 
     @Override
     public boolean promptContinue(String name) {
-        System.out.print(name +": Continue? (true/false): ");
-        return scanner.nextBoolean();
+        String output;
+        boolean fail;
+        
+        do {
+            try {
+                fail = false;
+                System.out.print(name +": Continue? (y/n): ");
+                output = scanner.next();
+                if(output.equalsIgnoreCase("y")) {
+                    return true;
+                } else if(output.equalsIgnoreCase("n")){
+                    return false;
+                } else {
+                    fail = true;
+                }
+            } catch(InputMismatchException e) {
+                fail = true;
+            }
+        } while(fail);
+        return false;
     }
     
 }

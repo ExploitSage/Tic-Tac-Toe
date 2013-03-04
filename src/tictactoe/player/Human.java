@@ -19,7 +19,20 @@ public class Human extends Player {
     
     @Override
     public int prompt() {
-        return TicTacToe.renderer.promptHuman();
+        boolean fail;
+        String prompt;
+        int output = 0;
+        
+        do {
+            prompt = TicTacToe.renderer.promptHuman();
+            try {
+                output = Integer.parseInt(prompt);
+                fail = false;
+            } catch (NumberFormatException e) {
+                fail = true;
+            }
+        } while(fail);
+        return output;
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
