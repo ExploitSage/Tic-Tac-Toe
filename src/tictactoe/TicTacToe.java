@@ -31,6 +31,7 @@ public class TicTacToe {
     private static Player[] player = new Player[2];
     public static Board board = new Board();
     public static Renderer renderer = new CLI();
+    
     /**
      * @param args the command line arguments
      */
