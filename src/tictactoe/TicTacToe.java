@@ -39,7 +39,7 @@ public class TicTacToe {
         // TODO code application logic here
         player[0] = new Human(Space.State.X);
         player[1] = new AI(Space.State.O);
-        
+        System.out.println("Welcome to TicTacToe!");
         boolean gameOn = true;
         while(gameOn) {
             for(int i = 0; i < player.length; i++) {
